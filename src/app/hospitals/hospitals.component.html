@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group list-group">
+                <li class="list-group-item" (click)="showData(item.name)" *ngFor="let item of hospital">{{ item.name }}</li>
+              </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group" >
+            <li class="list-group-item" *ngIf="name">{{ name }}</li>
+            <li class="list-group-item" *ngIf="address">{{ address }}</li>
+            <li class="list-group-item" *ngIf="doctor">{{ doctor }}</li>
+            <li class="list-group-item" *ngIf="patient">{{ patient }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
