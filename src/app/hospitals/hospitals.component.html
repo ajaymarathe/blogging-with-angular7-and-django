@@ -4,8 +4,10 @@
       <div class="row">
         <div class="col-md-6">
             <ul class="list-group list-group">
-                <li class="list-group-item" (click)="showData(item.name)" *ngFor="let item of hospital">{{ item.name }}</li>
-              </ul>
+                <div  *ngFor="let item of hospital">
+                  <li (click)="listClick($event, item)" class="list-group-item" [ngClass]="{'active': item.isSelected==true}"  (click)="showData(item.name)">{{ item.name }}</li>
+                </div>
+            </ul>
         </div>
         <div class="col-md-6">
           <ul class="list-group" >
