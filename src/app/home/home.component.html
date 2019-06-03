@@ -4,7 +4,7 @@
       <div class="card mb-3" *ngFor="let post of posts">
         <div class="card-body" >
           <h2>{{ post.title }}</h2>
-          <p>{{ post.body }}</p>
+          <p [innerHtml]="post.body"></p>
           <a class="btn btn-primary" [routerLink]="['/show',post.id]" routerLinkActive="router-link-active"> Read More </a>
         </div>
         <div class="card-footer">

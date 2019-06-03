@@ -3,6 +3,7 @@
     <div class="col-md-8">
       <div class="card bg-primary text-white" *ngIf="post">
         <div class="card-body">
+          <p>{{ post.id }}</p>
           <h2>{{ post.title }}</h2>
           <p>{{ post.body }}</p>
           <div class="w-100 d-flex justify-content-end">
@@ -14,6 +15,9 @@
         </div>
         <div class="card-footer">
           <p class="m-0">By Ajay Marathe on {{ post.created_at }}</p>
+          <ul>
+            <li *ngFor="let comment of comments">post id: {{ comment.post_id }} -- {{ comment.body}}</li>
+          </ul>
         </div>
       </div>
     </div>

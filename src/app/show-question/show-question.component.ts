@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
+import { CommentService } from '../comment.service';
+
 import {ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,14 +16,19 @@ export class ShowQuestionComponent implements OnInit {
       private post_service: PostService,
       private route: ActivatedRoute,
       private location: Location,
+      private comment_service: CommentService
       ) { }
 
 
   post;
+  responseDAta;
+  comments;
 
   ngOnInit() {
     this.GetPost();
+    this.Post_comment();
   }
+
 
   GetPost(){
     const id = this.route.snapshot.params.id;
@@ -52,6 +59,20 @@ export class ShowQuestionComponent implements OnInit {
       (error) => {
         this.location.back();
         console.log(error)
+      }
+    )
+  }
+
+  Post_comment(){ 
+    this.comment_service.GetComments()
+    .subscribe(
+      (response: Response)=>{
+        this.responseDAta = response;
+        console.log(response);
+        this.comments = Object.keys(this.responseDAta.objects).map((keys) => this.responseDAta.objects[keys])
+      },
+      (error) => {
+        console.log(error);
       }
     )
   }

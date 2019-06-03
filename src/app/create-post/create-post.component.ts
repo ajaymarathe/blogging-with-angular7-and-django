@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SlugifyPipe } from '../slugify.pipe';
+import { PostService } from '../post.service';
+import { Router } from "@angular/router"; 
 
 @Component({
   selector: 'app-create-post',
@@ -8,12 +10,10 @@ import { SlugifyPipe } from '../slugify.pipe';
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor(private slugify_pipe: SlugifyPipe,) { }
+  constructor(private slugify_pipe: SlugifyPipe, private post_service: PostService,private router: Router) { }
 
   title;
   body;
-  category_id;
-  user_id;
 
 
   ngOnInit() {
@@ -21,8 +21,20 @@ export class CreatePostComponent implements OnInit {
 
   StorethePost(){
     const slug = this.slugify_pipe.transform(this.title)
-    console.log(slug);
-    // const storeData = { name: "John", age: 30, city: "New York" };
+    const storeData = [this.title, slug, this.body, 4, 6];
+    console.log(storeData);
+
+    this.post_service.StorePost(storeData)
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+        this.router.navigate(['']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
   }
 
 }

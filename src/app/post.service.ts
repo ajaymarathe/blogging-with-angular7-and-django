@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +16,13 @@ export class PostService {
     return this.http.get('http://localhost:8000/api/posts/'+id+'/');
   }
 
-  StorePost(){
+  StorePost(storeData){
     return this.http.post('http://localhost:8000/api/posts/',{
-
+      "title": storeData[0],
+      "slug": storeData[1],
+      "body": storeData[2],
+      "category": storeData[3],
+      "user_id": storeData[4]
     });
   }
 
